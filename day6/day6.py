@@ -5,8 +5,6 @@ buffer = []
 index = 0
 part1 = False
 
-#abb
-
 bufferSize = 4 if part1 else 14
 
 def isArrayUnique(array):
