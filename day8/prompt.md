@@ -71,4 +71,4 @@ This tree's scenic score is **`8`** (`2 * 2 * 1 * 2`); this is the ideal spot fo
 
 Consider each tree on your map. **What is the highest scenic score possible for any tree?**
 
-Source: [AdventOfCode](https://adventofcode.com/2022/day/7)
+Source: [AdventOfCode](https://adventofcode.com/2022/day/8)
