@@ -43,3 +43,5 @@ for line in lines:
         tempLines.clear()
 
 print("Final sum part 2: " + str(badgeSum)) #2760
+
+#Source: [AdventOfCode](https://adventofcode.com/2022/day/3)

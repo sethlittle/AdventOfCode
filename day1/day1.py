@@ -37,3 +37,5 @@ print("Third Most Calories: " + str(thirdCal))
 
 topThreeCals = topCal + secondCal + thirdCal
 print("Top Three Calories Combined: " + str(topThreeCals))
+
+#Source: [AdventOfCode](https://adventofcode.com/2022/day/1)

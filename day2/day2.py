@@ -100,3 +100,5 @@ for line in lines:
     points = points + results[line[2]]
     
 print("Total Number of Points: " + str(points)) # correct is 14827
+
+#Source: [AdventOfCode](https://adventofcode.com/2022/day/2)
