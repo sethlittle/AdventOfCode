@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+
+import argparse
+import time
+from enum import Enum
+from math import lcm
+
+class Direction(Enum):
+    LEFT = 'L'
+    RIGHT = 'R'
+
+class Description(Enum):
+    START=1
+    END=2
+
+# Goal - map of instructions and then tuples of directions (L or R)
+# MAP with the key being the starting location and a map with keys left and right as the value (with those values being their locations)
+
+# fields for part 1
+mapOfNodes = {}
+instructions = ''
+startNodes = []
+endNodes = []
+
+# helper functions
+def parseInput(line):
+    global mapOfNodes
+    lineParts = line.split('=')
+    key = lineParts[0].strip()
+    values = lineParts[1].strip().replace('(', '').replace(')', '').split(',')
+    if checkDescription(key, Description.START):
+        startNodes.append(key)
+    elif checkDescription(key, Description.END):
+        endNodes.append(key)
+    if key not in mapOfNodes.keys():
+        mapOfNodes[key] = {Direction.LEFT.value: values[0].strip(), Direction.RIGHT.value: values[1].strip()}
+
+def traverseMap(startNode, finalNodes):
+    index = 0
+    numberOfSteps = 0
+    global mapOfNodes, instructions
+    if instructions == '':
+        raise Exception('No instructions found')
+    currentNode = startNode
+    while currentNode not in finalNodes:
+        if currentNode not in mapOfNodes.keys():
+            raise Exception('No path found')
+        instruction = instructions[index % len(instructions)]
+        currentNode = mapOfNodes[currentNode][instruction]
+        numberOfSteps += 1
+        index += 1
+    return numberOfSteps
+
+def checkDescription(key, description):
+    if description == Description.START:
+        if key[-1] == 'A':
+            return True
+    elif description == Description.END:
+        if key[-1] == 'Z':
+            return True
+    return False
+
+def part1(filename):
+    global startNode, finalNode, mapOfNodes, instructions
+
+    input = open(filename, 'r')
+    lines = input.readlines()
+
+    for index, line in enumerate(lines):
+        if index == 0:
+            instructions = line.replace('\n', '')
+        elif line != '\n':
+            parseInput(line.replace('\n', ''))
+    
+    startNode = 'AAA'
+    finalNode = 'ZZZ'
+    
+    print('PART 1: Number of steps: ' + str(traverseMap(startNode, [finalNode])))
+    # PART 1 Answer: 22199
+
+def part2(filename):
+    global mapOfNodes, startNodes, endNodes, instructions
+    numberOfSteps = 0
+    cycles = []
+
+    for node in startNodes:
+        cycles.append(traverseMap(node, endNodes))
+    
+    numberOfSteps = lcm(*cycles)
+
+    print('PART 2: Number of steps: ' + str(numberOfSteps))
+    # PART 2 Answer: 13334102464297
+
+def main():
+    parser = argparse.ArgumentParser(description='Advent of Code 2023 Day 8')
+    parser.add_argument('input_file', metavar='filename', type=str, default='inputFile.txt', help='Path to input.')
+    args = parser.parse_args()
+
+    start_time = time.time()
+    part1(args.input_file)
+    print('Part 1 execution time: {:.3f} seconds'.format(time.time() - start_time))
+
+    start_time = time.time()
+    part2(args.input_file)
+    print('Part 2 execution time: {:.3f} seconds'.format(time.time() - start_time))
+
+if __name__ == '__main__':
+    main()
+
+#Source: [AdventOfCode](https://adventofcode.com/2023/day/8)

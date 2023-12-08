@@ -261,7 +261,7 @@ def part2(filename):
     # PART 2 Answer: 250057090
 
 def main():
-    parser = argparse.ArgumentParser(description='Advent of Code 2023 Day 3')
+    parser = argparse.ArgumentParser(description='Advent of Code 2023 Day 7')
     parser.add_argument('input_file', metavar='filename', type=str, default='inputFile.txt', help='Path to input.')
     args = parser.parse_args()
 
