@@ -87,6 +87,7 @@ def part1(filename):
     # PART 1 Answer: 6947
 
 # if you shoot a ray from a point to the edge of the grid, the ray crosses the edge an odd number of times if and only if the point is inside the polygon
+# got help from this part online
 def evenOdd(x, y, path):
     n = len(path) - 1
     c = False
@@ -115,7 +116,7 @@ def part2():
     # PART 2 Answer: 273
 
 def main():
-    parser = argparse.ArgumentParser(description='Advent of Code 2023 Day 9')
+    parser = argparse.ArgumentParser(description='Advent of Code 2023 Day 10')
     parser.add_argument('input_file', metavar='filename', type=str, default='inputFile.txt', help='Path to input.')
     args = parser.parse_args()
 
